@@ -1,0 +1,131 @@
+//
+//  BulletSimple.m
+//  SpaceDefense
+//
+//  Created by Eliphas on 22.10.13.
+//  Copyright 2013 Eliphas. All rights reserved.
+//
+
+#import "BulletSimple.h"
+#import "TextureExtractor.h"
+#import "geoHelper.h"
+#import "EnemySimpleFactory.h"
+#import "BulletSimpleFactory.h"
+
+#import "SpeedHelper.h"
+
+
+@interface BulletSimple(){
+    CCSpriteBatchNode* __weak bulletBatch;
+    
+    CGPoint target;
+    CGPoint velocity;    
+    float currentSpeed;
+    float currentDamage;
+    bool isPlayerBullet;
+    BulletSimpleType currentType;
+    
+}
+
+@end
+
+@implementation BulletSimple
+
++(void) shootBulletFrom:(CGPoint)startPoint To:(CGPoint)targetPoint WithType:(BulletSimpleType)type WithDamage:(float) damage Speed:(float)speed FromPlayer:(bool)isFromPlayer {
+    BulletSimpleFactory* sharedBF = [BulletSimpleFactory sharedInstance];
+    BulletSimple* bs = [sharedBF createBullet];
+    if(bs.parent != nil)
+    {
+        CCLOG(@"SHIT! ALREADY IN SCENE!");
+    }
+    [bs buildWithType:type Damage:damage Speed:speed FromPlayer:isFromPlayer];
+    [bs spawnAtPoint:startPoint];
+    [bs moveToPoint:targetPoint];
+}
+
+-(id) initWithPlayer:(Player *)player GameNode:(MainGameLayer *)node{
+    if(self = [super initWithPlayer:player GameNode:node])
+    {
+        bulletBatch = [gameNode mainBatchNode];
+    }
+    return self;
+}
+
+-(void) buildWithType:(BulletSimpleType)type Damage:(float)damage Speed:(float)speed FromPlayer:(bool)isFromPlayer {
+    currentType = type;
+    currentSpeed = speed;
+    currentDamage = damage;
+    isPlayerBullet = isFromPlayer;
+    switch (type) {
+        case SimplePhoton:
+            [self buildSimplePhoton];
+            break;
+            
+        default:
+            [NSException raise:@"Unknown simple bullet type" format:nil];
+            break;
+    }
+    
+    
+}
+
+-(void)moveToPoint:(CGPoint)point{
+    float dx = point.x - self.position.x;
+    float dy = point.y - self.position.y;
+    float distance = ccpDistance(self.position, point);
+    float ratio = ([self speed] / distance);
+    velocity = CGPointMake(ratio * dx, ratio * dy);
+    
+    //rotate the bullet
+    float angleRadians = atanf((float)dy / (float)dx);
+    float angleDegrees = CC_RADIANS_TO_DEGREES(angleRadians);
+    float cocosAngle = -1 * angleDegrees;
+    self.rotation = cocosAngle;
+    
+    [self scheduleUpdate];
+}
+
+-(void) buildSimplePhoton {
+    CCTexture2D* texture = [[TextureExtractor instance] getTextureByName:@"beam1.png"];
+    self.texture = texture;
+    [self setTextureRect:CGRectMake(0, 0, texture.contentSize.width, texture.contentSize.height)];
+    [gameNode addChild:self];
+}
+
+-(void)update:(ccTime)delta{
+    self.position = ccpAdd(self.position, getWorldVelocity(ccpMult(velocity, delta)));
+    
+    //out of screen check
+    if(!CGRectIntersectsRect(self.boundingBox, gameNode.boundingBox))
+    {
+        [self redeem];
+        return;
+    }
+    
+    for(BaseGameObject* enemy in  [EnemySimpleFactory sharedInstance].objectsInUse)
+    {
+        if(CGRectIntersectsRect(self.hitBox, enemy.hitBox))
+        {
+            bool wasHit = [enemy takeHit:currentDamage]; 
+            if(wasHit){                
+                [self redeem]; //we can't redeem the same bullet twice
+                //CCLOG(@"HIT!!");
+                return; //we can hit only 1 enemy with our bullet
+            }
+        }
+    }
+}
+
+-(void)redeem{
+    [super redeem];
+    //CCLOG(@"BulletSimple was redeemed!! :)");
+}
+
+-(float)speed
+{
+    return currentSpeed;
+}
+
+
+
+@end
