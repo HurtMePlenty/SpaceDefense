@@ -14,7 +14,6 @@
 
 @interface BaseGameObject : CCNode
 {
-    BOOL wasRendered;
     @protected
     MainGameLayer* __weak gameNode;
     Player* currentPlayer;
@@ -27,4 +26,5 @@
 -(void) spawnAtPoint:(CGPoint)point;
 -(bool) takeHit: (float) damage;
 -(id) initWithPlayer:(Player*)player GameNode:(MainGameLayer*)node;
+-(void) pause;
 @end

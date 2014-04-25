@@ -10,12 +10,14 @@
 #import "cocos2d.h"
 #import "PlayerInputDelegate.h"
 
-#define DRAW_HITBOX 0
+#define DRAW_HITBOX 1
+
 
 @interface MainGameLayer : CCLayer {
     
 }
 @property (nonatomic) id<PlayerInputDelegate> playerInputDelegate;
 -(CCSpriteBatchNode*) mainBatchNode;
+-(CCSpriteBatchNode*) explosionNode;
 
 @end

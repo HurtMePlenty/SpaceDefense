@@ -22,12 +22,13 @@
 
 @property (nonatomic) GameObjectFactory* responsibleFactory;
 
+-(CGRect) hitBox;
 -(void) activate;
 -(void) redeem;
 -(void) spawnAtPoint:(CGPoint)point;
 -(void) renderMe;
--(float) speed;
--(CGRect) hitBox;
 -(id) initWithPlayer:(Player*)player GameNode:(MainGameLayer*)node;
+-(bool) takeHit: (float) damage;
+-(void) pause;
 @end
 

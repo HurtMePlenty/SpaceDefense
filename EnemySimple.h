@@ -15,7 +15,7 @@ typedef enum {
 } EnemySimpleType;
 
 
-@interface EnemySimple : BaseGameObject 
+@interface EnemySimple : BaseGameObject
 
 -(bool) takeHit: (float)damage;
 -(void) buildWithType: (EnemySimpleType) type Health:(float)health;

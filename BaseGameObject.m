@@ -38,33 +38,24 @@
 
 -(void) spawnAtPoint:(CGPoint)point{
     self.position = point;
-    [gameNode addChild:self];
 }
 
-
-
--(void) activate {
+-(void) pause {
     
 }
 
+
+-(void) activate {
+    [NSException raise:@"NotImplemented" format:@"activate should be implemented in child"];
+}
+
 -(CGRect) hitBox{
-    return self.boundingBox;
+    [NSException raise:@"NotImplemented" format:@"hitBox should be implemented in child"];
 }
 
 -(bool) takeHit: (float) damage {
     return NO;
 }
-
-
-#if DEBUG
--(void)draw {
-    if(DRAW_HITBOX) {
-        CGRect rect = [self boundingBox];
-        ccDrawRect(ccp(0,0),ccp(rect.size.width,rect.size.height));
-    }
-    [super draw];
-}
-#endif
 
 
 

@@ -34,6 +34,8 @@
 -(id) init
 {
     if( (self=[super init])) {
+        [self loadResources];
+        
         screenSize = [CCDirector sharedDirector].winSize;  
         gameLayer = [MainGameLayer node];
         uiLayer = [UILayer node];
@@ -42,9 +44,16 @@
         [self addChild:bgLayer z:-1];
         [self addChild:gameLayer z:0];
         [self addChild:uiLayer z:1];
-        [self addChild:gameManager];
+        [self addChild:gameManager];        
+     
     }
     return self;
+}
+
+-(void) loadResources {
+    CCSpriteFrameCache *frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+    [frameCache addSpriteFramesWithFile:@"ExplosionAtlas.plist"];
+    [frameCache addSpriteFramesWithFile:@"BasePack.plist"];
 }
 
 

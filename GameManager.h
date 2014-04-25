@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "PlayerInputDelegate.h"
+#import "PlayerInterfaceDelegate.h"
 #import "MainGameLayer.h"
 
 
-@interface GameManager : CCNode <PlayerInputDelegate>
+@interface GameManager : CCNode <PlayerInputDelegate, PlayerInterfaceDelegate>
 
 -(id) initWithGameNode:(MainGameLayer*)node UINode:(CCNode*)interfaceNode;
 

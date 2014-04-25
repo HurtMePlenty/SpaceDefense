@@ -30,13 +30,13 @@
 @implementation AnimationHelper
 
 +(CCAnimate*) createRedExplosionSimpleAnimation {
-    CCAnimation* animation = [CCAnimation animationWithFrame:@"RedExplosionSimple_" startFrameIndex:1 frameCount:24 delay:0.04f];
+    CCAnimation* animation = [CCAnimation animationWithFrame:@"RedExplosionSimple_" startFrameIndex:1 frameCount:24 delay:0.03f];
     CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
     return animate;
 }
 
 +(CCAnimate*) createRedExplosionSimple2Animation {
-    CCAnimation* animation = [CCAnimation animationWithFrame:@"RedExplosionSimple2_" startFrameIndex:1 frameCount:25 delay:0.04f];
+    CCAnimation* animation = [CCAnimation animationWithFrame:@"RedExplosionSimple2_" startFrameIndex:1 frameCount:25 delay:0.03f];
     CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
     return animate;
 }

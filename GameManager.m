@@ -54,7 +54,7 @@
 -(void) createWave:(ccTime)delta {
     CCLOG(@"creating Wave");
     currentEnemyAmount = 0;
-    enemySimpleWaveAmount = CCRANDOM_0_1() * 90 + 2;
+    enemySimpleWaveAmount = 3; // CCRANDOM_0_1() * 90 + 2;
     enemyTotalWave = enemySimpleWaveAmount;
     
     [self startSpawnNext];
@@ -73,7 +73,7 @@
 }
 
 -(void) createEnemy:(ccTime)delta {
-    BaseGameObject* enemy;
+    SimpleGameObject* enemy;
     int totalEnemyCount = enemySimpleWaveAmount;
     int rnd = CCRANDOM_0_1() * totalEnemyCount;
     if(rnd >= 0 && rnd < enemySimpleWaveAmount)
@@ -109,7 +109,7 @@
 
 
 -(void) createPlayer{
-    player = [[Player alloc] initWithGameNode:gameNode];
+    player = [[Player alloc] initWithGameNode:gameNode InterfaceDelegate:self];
     [player spawn];
 }
 
@@ -128,5 +128,12 @@
 -(void)dealloc{
     [BulletSimpleFactory killInstance];
 }
+
+-(void)playerDied {
+    CCLabelTTF* label = [CCLabelTTF labelWithString:@"You lost" fontName:@"Helvetica-BoldOblique" fontSize:18 ];
+    label.position = ccp(gameNode.contentSize.width / 2, gameNode.contentSize.height / 2);
+    [gameNode addChild:label];
+}
+
 
 @end

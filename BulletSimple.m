@@ -16,7 +16,6 @@
 
 
 @interface BulletSimple(){
-    CCSpriteBatchNode* __weak bulletBatch;
     
     CGPoint target;
     CGPoint velocity;    
@@ -43,26 +42,19 @@
     [bs moveToPoint:targetPoint];
 }
 
--(id) initWithPlayer:(Player *)player GameNode:(MainGameLayer *)node{
-    if(self = [super initWithPlayer:player GameNode:node])
-    {
-        bulletBatch = [gameNode mainBatchNode];
-    }
-    return self;
-}
-
 -(void) buildWithType:(BulletSimpleType)type Damage:(float)damage Speed:(float)speed FromPlayer:(bool)isFromPlayer {
     currentType = type;
     currentSpeed = speed;
     currentDamage = damage;
     isPlayerBullet = isFromPlayer;
+    
     switch (type) {
         case SimplePhoton:
             [self buildSimplePhoton];
             break;
             
         default:
-            [NSException raise:@"Unknown simple bullet type" format:nil];
+            [NSException raise:@"UnknownType" format:@"Unknown simple bullet type"];
             break;
     }
     
@@ -86,10 +78,12 @@
 }
 
 -(void) buildSimplePhoton {
-    CCTexture2D* texture = [[TextureExtractor instance] getTextureByName:@"beam1.png"];
-    self.texture = texture;
-    [self setTextureRect:CGRectMake(0, 0, texture.contentSize.width, texture.contentSize.height)];
-    [gameNode addChild:self];
+    CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+    CCSpriteFrame* spriteFrame = [frameCache spriteFrameByName:@"beam1.png"];
+    [self setDisplayFrame:spriteFrame];
+    [[gameNode mainBatchNode] addChild:self];
+  
+
 }
 
 -(void)update:(ccTime)delta{
@@ -102,7 +96,7 @@
         return;
     }
     
-    for(BaseGameObject* enemy in  [EnemySimpleFactory sharedInstance].objectsInUse)
+    for(SimpleGameObject* enemy in  [EnemySimpleFactory sharedInstance].objectsInUse)
     {
         if(CGRectIntersectsRect(self.hitBox, enemy.hitBox))
         {
@@ -126,6 +120,9 @@
     return currentSpeed;
 }
 
+-(void) pause {
+    [self pauseSchedulerAndActions];
+}
 
 
 @end

@@ -14,32 +14,36 @@
 
 
 @interface EnemySimple() {
-    CCSprite* selfSprite;
-    
     EnemySimpleType currentType;
     float maxHealth;
     float currentHealth;
     float speed;    
     CGPoint velocity;    
+    float crashDamage;
+    
     bool wasShown; //we should show our object on the game screen, before checking if it has left it
     bool isDead;
+    
+    CCSprite* enemySprite;
+    CCSprite* explosionSprite;
 }
 
 @end
 
 @implementation EnemySimple
 
--(void)activate {    
+-(void)activate {
     [self moveOnPlayerSimple];
     [self scheduleUpdate];
-    //CGPoint targetPoint = ccp(-self.contentSize.width/2, self.position.y);
-    //CCMoveTo* moveTo = [CCMoveTo actionWithDuration:7.0f position:targetPoint];
-    //[self runAction:moveTo];
-
 }
 
 -(void) moveOnPlayerSimple {
     velocity = ccp(-speed, 0);
+}
+
+-(void) spawnAtPoint:(CGPoint)point {
+    [super spawnAtPoint:point];
+    [self pullAllComponents];
 }
 
 -(void)buildWithType:(EnemySimpleType)type Health:(float)health {
@@ -65,22 +69,24 @@
 -(void) cleanContent {
     wasShown = false;
     isDead = false;
-    [self removeAllChildren];  //we should extend this logic after using batch;
+    [self removeAllChildren];
+    [[gameNode mainBatchNode] removeChild:enemySprite];
+    [[gameNode explosionNode] removeChild:explosionSprite];
+    enemySprite = nil;
+    explosionSprite = nil;
 }
 
 -(void) buildPirate {
-    selfSprite = [CCSprite node];   
-
-    CCTexture2D* texture = [[TextureExtractor instance] getTextureByName:@"pirate.png"];
-    selfSprite.texture = texture;
-    [selfSprite setTextureRect:CGRectMake(0, 0, texture.contentSize.width, texture.contentSize.height)];
-    self.contentSize = CGSizeMake(texture.contentSize.width, texture.contentSize.height);
-    self.anchorPoint = ccp(0.5f, 0.5f);
-    selfSprite.position = ccp(texture.contentSize.width / 2, texture.contentSize.height / 2);
-    
     speed = 150.0f;
+    crashDamage = 20.0f;
+    CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+    CCSpriteFrame* spriteFrame = [frameCache spriteFrameByName:@"enemy1-128.png"];
+    enemySprite = [CCSprite spriteWithSpriteFrame:spriteFrame];
     
-    [self addChild:selfSprite];
+    [gameNode addChild:self];
+    [[gameNode mainBatchNode] addChild:enemySprite];
+
+    
 }
 
 -(void) buildScout {
@@ -106,37 +112,83 @@
 
 -(void) destroy {
     isDead = true;
-    NSLog(@"I was destroyed!!!");
     CCAnimate* anim = [AnimationHelper createRandomRedExplosionSimpleAnimation];
     
     CCCallBlock* redeemAction = [CCCallBlock actionWithBlock:^void(){
         [self redeem];
     }];
-    
     CCSequence* seq = [CCSequence actions:anim, redeemAction, nil];
-    [selfSprite runAction: seq];
+
+    explosionSprite = [CCSprite spriteWithTexture:[[gameNode explosionNode] texture] rect:CGRectZero];
+    explosionSprite.position = self.position;
+    
+    [enemySprite setVisible:NO];
+    
+    [[gameNode explosionNode] addChild:explosionSprite];
+    [explosionSprite runAction:seq];
+    
+    
     [self unscheduleUpdate];
-    //[self redeem];
+}
+
+-(void) pullAllComponents {
+    enemySprite.position = self.position;
 }
 
 -(void)update:(ccTime)delta {
+    
     self.position = ccpAdd(self.position, getWorldVelocity(ccp(velocity.x * delta, velocity.y * delta)));
+    [self pullAllComponents];
 
-    if(!CGRectIntersectsRect(self.boundingBox, gameNode.boundingBox))
+
+    if(!CGRectIntersectsRect(self.hitBox, gameNode.boundingBox))
     {
         if(wasShown){
             [self redeem];
         }
     } else {
         wasShown = true;
-    }    
+    }
+    
+    if(CGRectIntersectsRect(self.hitBox, currentPlayer.hitBox))
+    {
+        [currentPlayer takeHit:crashDamage];
+        [self destroy]; //todo special crash animation?
+    }
 }
 
 -(void)redeem {
     [super redeem];
     [self cleanContent];
-    NSLog(@"EnemySimple was redeemed! :)");
 }
+
+-(CGRect) hitBox {
+    CGRect collisionRect = [self getCollisionRect];
+    return CGRectApplyAffineTransform(collisionRect, [self nodeToParentTransform]);
+}
+
+-(CGRect) getCollisionRect {
+    float boxWidth = enemySprite.contentSize.width;
+    float boxHeight = enemySprite.contentSize.height;
+
+    CGRect rect = CGRectMake(-boxWidth / 2, -boxHeight / 2, boxWidth, boxHeight);
+    return rect;
+}
+
+-(void) pause {
+    [self pauseSchedulerAndActions];
+    if(explosionSprite){
+        [explosionSprite pauseSchedulerAndActions];
+    }
+}
+
+#if DEBUG
+-(void) draw {
+    CGRect collisionRect = [self getCollisionRect];
+    ccDrawRect(collisionRect.origin, ccpAdd(collisionRect.origin, ccp(collisionRect.size.width, collisionRect.size.height)));
+    [super draw];
+}
+#endif
 
 
 

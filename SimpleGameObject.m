@@ -31,7 +31,6 @@
 }
 
 - (void) redeem {
-    self.visible = NO;
     [self.parent removeChild:self];
     [self unscheduleUpdate];
     if(self.parent != nil)
@@ -43,7 +42,7 @@
 
 -(void) spawnAtPoint:(CGPoint)point{
     self.position = point;
-    self.visible = YES;
+    
 }
 
 -(void)renderMe{
@@ -54,21 +53,25 @@
     
 }
 
--(CGRect) hitBox {
-    return self.boundingBox;
+-(void)pause {
+    
 }
 
--(float)speed{
-    return 0.0f;
+-(CGRect) hitBox {
+    return [self boundingBox];
+}
+
+-(bool) takeHit: (float) damage {
+    return NO;
 }
 
 #if DEBUG
--(void)draw {
+-(void)draw { //won't be called if we use CCSpriteBatchNode
     if(DRAW_HITBOX){
         CGRect rect = [self boundingBox];
-        ccDrawRect(ccp(0,0),ccp(rect.size.width,rect.size.height));
+        ccDrawRect(ccp(0,0), ccp(rect.size.width,rect.size.height));
     }
-    [super draw];    
+    [super draw];
 }
 #endif
  

@@ -39,9 +39,7 @@
 		369CFE0518206F3800D5C038 /* ship3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 369CFE0118206F3800D5C038 /* ship3-hd.png */; };
 		369CFE0618206F3800D5C038 /* ship3.png in Resources */ = {isa = PBXBuildFile; fileRef = 369CFE0218206F3800D5C038 /* ship3.png */; };
 		369CFE0A182078C700D5C038 /* FactoryInitializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 369CFE09182078C700D5C038 /* FactoryInitializer.m */; };
-		369CFE101840219900D5C038 /* ExplosionAtlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 369CFE0E1840219900D5C038 /* ExplosionAtlas.plist */; };
 		369CFE14184025A900D5C038 /* AnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 369CFE13184025A900D5C038 /* AnimationHelper.m */; };
-		369CFE161840D74E00D5C038 /* ExplosionAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 369CFE151840D74D00D5C038 /* ExplosionAtlas.png */; };
 		36B268B418083D38004A1F5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 367611C318083C8F00B123FE /* Foundation.framework */; };
 		36B268B918083D38004A1F5D /* cocos2d_library.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36B268B818083D38004A1F5D /* cocos2d_library.h */; };
 		36B268BB18083D38004A1F5D /* cocos2d_library.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B268BA18083D38004A1F5D /* cocos2d_library.m */; };
@@ -174,6 +172,12 @@
 		36B26A871815E3AF004A1F5D /* beam1.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B26A851815E3AF004A1F5D /* beam1.png */; };
 		36B26A8A1815E4BC004A1F5D /* BulletSimple.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B26A891815E4BC004A1F5D /* BulletSimple.m */; };
 		36B26A8D1817356D004A1F5D /* BulletSimpleFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B26A8C1817356D004A1F5D /* BulletSimpleFactory.m */; };
+		36DCC07F18A440AC006A44A3 /* ExplosionAtlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36DCC07918A440AC006A44A3 /* ExplosionAtlas.plist */; };
+		36DCC08018A440AC006A44A3 /* ExplosionAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DCC07A18A440AC006A44A3 /* ExplosionAtlas.png */; };
+		36DCC08618BC084F006A44A3 /* BasePack-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36DCC08218BC084F006A44A3 /* BasePack-hd.plist */; };
+		36DCC08718BC084F006A44A3 /* BasePack-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DCC08318BC084F006A44A3 /* BasePack-hd.png */; };
+		36DCC08818BC084F006A44A3 /* BasePack.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36DCC08418BC084F006A44A3 /* BasePack.plist */; };
+		36DCC08918BC084F006A44A3 /* BasePack.png in Resources */ = {isa = PBXBuildFile; fileRef = 36DCC08518BC084F006A44A3 /* BasePack.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -232,10 +236,8 @@
 		369CFE08182078C600D5C038 /* FactoryInitializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactoryInitializer.h; sourceTree = "<group>"; };
 		369CFE09182078C700D5C038 /* FactoryInitializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactoryInitializer.m; sourceTree = "<group>"; };
 		369CFE0C183EBAC900D5C038 /* SpeedHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedHelper.h; sourceTree = "<group>"; };
-		369CFE0E1840219900D5C038 /* ExplosionAtlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ExplosionAtlas.plist; path = Resources/Atlases/ExplosionAtlas.plist; sourceTree = "<group>"; };
 		369CFE12184025A900D5C038 /* AnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationHelper.h; sourceTree = "<group>"; };
 		369CFE13184025A900D5C038 /* AnimationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationHelper.m; sourceTree = "<group>"; };
-		369CFE151840D74D00D5C038 /* ExplosionAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ExplosionAtlas.png; path = Resources/Atlases/ExplosionAtlas.png; sourceTree = "<group>"; };
 		36B268B318083D38004A1F5D /* libcocos2d-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36B268B718083D38004A1F5D /* cocos2d-library-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cocos2d-library-Prefix.pch"; sourceTree = "<group>"; };
 		36B268B818083D38004A1F5D /* cocos2d_library.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cocos2d_library.h; sourceTree = "<group>"; };
@@ -526,6 +528,13 @@
 		36B26A891815E4BC004A1F5D /* BulletSimple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletSimple.m; sourceTree = "<group>"; };
 		36B26A8B1817356C004A1F5D /* BulletSimpleFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletSimpleFactory.h; sourceTree = "<group>"; };
 		36B26A8C1817356D004A1F5D /* BulletSimpleFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletSimpleFactory.m; sourceTree = "<group>"; };
+		36DCC07918A440AC006A44A3 /* ExplosionAtlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExplosionAtlas.plist; sourceTree = "<group>"; };
+		36DCC07A18A440AC006A44A3 /* ExplosionAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ExplosionAtlas.png; sourceTree = "<group>"; };
+		36DCC08218BC084F006A44A3 /* BasePack-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BasePack-hd.plist"; sourceTree = "<group>"; };
+		36DCC08318BC084F006A44A3 /* BasePack-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BasePack-hd.png"; sourceTree = "<group>"; };
+		36DCC08418BC084F006A44A3 /* BasePack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BasePack.plist; sourceTree = "<group>"; };
+		36DCC08518BC084F006A44A3 /* BasePack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasePack.png; sourceTree = "<group>"; };
+		36DD2812189DC11F009CD34D /* PlayerInterfaceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInterfaceDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -650,6 +659,7 @@
 			isa = PBXGroup;
 			children = (
 				369CFDE918173F4800D5C038 /* PlayerInputDelegate.h */,
+				36DD2812189DC11F009CD34D /* PlayerInterfaceDelegate.h */,
 			);
 			name = GameDelegates;
 			sourceTree = "<group>";
@@ -681,8 +691,8 @@
 		369CFE0D1840218800D5C038 /* Atlases */ = {
 			isa = PBXGroup;
 			children = (
-				369CFE151840D74D00D5C038 /* ExplosionAtlas.png */,
-				369CFE0E1840219900D5C038 /* ExplosionAtlas.plist */,
+				36DCC08118BC084F006A44A3 /* BasePack1 */,
+				36DCC07818A440AC006A44A3 /* ExplosionAtlases */,
 			);
 			name = Atlases;
 			sourceTree = "<group>";
@@ -1189,6 +1199,28 @@
 			name = Shootaz;
 			sourceTree = "<group>";
 		};
+		36DCC07818A440AC006A44A3 /* ExplosionAtlases */ = {
+			isa = PBXGroup;
+			children = (
+				36DCC07918A440AC006A44A3 /* ExplosionAtlas.plist */,
+				36DCC07A18A440AC006A44A3 /* ExplosionAtlas.png */,
+			);
+			name = ExplosionAtlases;
+			path = Resources/Atlases/ExplosionAtlases;
+			sourceTree = "<group>";
+		};
+		36DCC08118BC084F006A44A3 /* BasePack1 */ = {
+			isa = PBXGroup;
+			children = (
+				36DCC08218BC084F006A44A3 /* BasePack-hd.plist */,
+				36DCC08318BC084F006A44A3 /* BasePack-hd.png */,
+				36DCC08418BC084F006A44A3 /* BasePack.plist */,
+				36DCC08518BC084F006A44A3 /* BasePack.png */,
+			);
+			name = BasePack1;
+			path = Resources/Atlases/BasePack1;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1262,15 +1294,20 @@
 				367611D018083C8F00B123FE /* Default@2x.png in Resources */,
 				367611D218083C8F00B123FE /* Default-568h@2x.png in Resources */,
 				367611D418083C8F00B123FE /* Default-Landscape~ipad.png in Resources */,
+				36DCC07F18A440AC006A44A3 /* ExplosionAtlas.plist in Resources */,
 				367611D618083C8F00B123FE /* Icon-72.png in Resources */,
+				36DCC08618BC084F006A44A3 /* BasePack-hd.plist in Resources */,
+				36DCC08718BC084F006A44A3 /* BasePack-hd.png in Resources */,
 				367611D818083C8F00B123FE /* Icon-Small-50.png in Resources */,
 				367611DA18083C8F00B123FE /* Icon-Small.png in Resources */,
+				36DCC08918BC084F006A44A3 /* BasePack.png in Resources */,
 				367611DC18083C8F00B123FE /* Icon-Small@2x.png in Resources */,
 				367611DE18083C8F00B123FE /* Icon.png in Resources */,
 				367611E018083C8F00B123FE /* Icon@2x.png in Resources */,
 				367611E318083C8F00B123FE /* iTunesArtwork in Resources */,
 				36B26A811811F463004A1F5D /* background1-hd.png in Resources */,
 				36B26A821811F463004A1F5D /* background1.png in Resources */,
+				36DCC08818BC084F006A44A3 /* BasePack.plist in Resources */,
 				36B26A861815E3AF004A1F5D /* beam1-hd.png in Resources */,
 				36B26A871815E3AF004A1F5D /* beam1.png in Resources */,
 				369CFDFD18206F2500D5C038 /* ms2-hd.png in Resources */,
@@ -1279,8 +1316,7 @@
 				369CFE0418206F3800D5C038 /* pirate.png in Resources */,
 				369CFE0518206F3800D5C038 /* ship3-hd.png in Resources */,
 				369CFE0618206F3800D5C038 /* ship3.png in Resources */,
-				369CFE101840219900D5C038 /* ExplosionAtlas.plist in Resources */,
-				369CFE161840D74E00D5C038 /* ExplosionAtlas.png in Resources */,
+				36DCC08018A440AC006A44A3 /* ExplosionAtlas.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

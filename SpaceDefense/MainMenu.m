@@ -47,8 +47,6 @@
 -(void) playGameHandler:(id)sender {
     CCLOG(@"play click");
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0 scene:[HomeScreen scene]]];
-    
-    
 }
 
 -(void) optionsHandler:(id)sender {
